@@ -1,8 +1,14 @@
 var express = require('express');
 var fileUpload = require('express-fileupload');
+var fs = require('fs');
 
 //inicializar variable
 var app = express();
+var usuarios = require('../models/usuario');
+var medicos = require('../models/medico');
+var hospitales = require('../models/hospital');
+
+
 
 // default options
 app.use(fileUpload());
@@ -62,15 +68,42 @@ app.put('/:tipo/:id', (req, res, next) => {
             });
         }
 
-        res.status(200).json({
-            ok: true,
-            mensaje: 'Archivo movido',
-            extensionArchivo: extensionArchivo
-        });
+        subirPorTipo(tipo, id, path, res);
+
+        // res.status(200).json({
+        //     ok: true,
+        //     mensaje: 'Archivo movido',
+        //     extensionArchivo: extensionArchivo
+        // });
 
     });
 
 
 });
+
+function subirPorTipo(tipo, id, path, res) {
+    if (tipo == 'usuarios') {
+        usuarios.findById(id, (err, usuario) => {
+            var pathViejo = '../uploads/usuarios/' + usuario.img;
+
+            // si existe, elimina la imagen anterior.
+            if (fs.existsSync(pathViejo)) {
+                fs.unlink(pathViejo);
+            }
+        });
+    }
+
+    if (tipo == 'medicos') {
+        medicos.findById(id, (err, medico) => {
+
+        });
+    }
+
+    if (tipo == 'hospitales') {
+        hospitales.findById(id, (err, hospital) => {
+
+        });
+    }
+}
 
 module.exports = app;
