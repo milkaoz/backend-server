@@ -11,8 +11,8 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app
 
 #Argumentos
-ARG ARG_MONGO_ADDR=localhost
-ARG ARG_MONGO_PORT=27017
+#ARG ARG_MONGO_ADDR=localhost
+#ARG ARG_MONGO_PORT=27017
 
 
 #Variables de ambiente
