@@ -46,7 +46,7 @@ app.use('/', appRoutes);
 
 
 //escuchar peticiones
-app.listen(3000, () => {
+app.listen(3002, () => {
     var fecha = new Date();
     console.log('Fecha: ' + fecha + ': Express server puerto 3000 \x1b[32m%s\x1b[0m', 'On line');
 });
